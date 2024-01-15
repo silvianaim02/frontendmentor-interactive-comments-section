@@ -1,8 +1,51 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+/* -------------------------------- 
+Typography
+-------------------------------- */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  /* set base values */
+  --text-base-size: 1em;
+}
+
+body {
+  font-size: var(--text-base-size);
+  color: var(--color-text);
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea:focus {
+  outline-style: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* -------------------------------- 
+Color
+-------------------------------- */
+
+:root {
+  --moderate-blue: hsl(238, 40%, 52%);
+  --light-grayish-blue: hsl(239, 57%, 85%);
+  --grayish-blue: hsl(211, 10%, 45%);
+  --very-light-gray: hsl(228, 33%, 97%);
+  --dark-blue: hsl(212, 24%, 26%);
+  --light-gray: hsl(223, 19%, 93%);
+  --soft-red: hsl(358, 79%, 66%);
+  --pale-red: hwb(357 72% 0%);
+  --white: hsl(0, 0%, 100%);
 }
