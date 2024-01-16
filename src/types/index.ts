@@ -6,21 +6,23 @@ export interface User {
   username: string;
 }
 
-export interface CardItemStuctureProps {
-  comment: {
+export interface Comment {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  user: User;
+  replies?: {
     id: number;
     content: string;
     createdAt: string;
     score: number;
     user: User;
-    replies: {
-      id: number;
-      content: string;
-      createdAt: string;
-      score: number;
-      user: User;
-    }[];
-  };
+  }[];
+}
+
+export interface CardItemStuctureProps {
+  comment: Comment;
   key: number;
   isReplyMode: boolean;
   handleReplyClick: () => void;

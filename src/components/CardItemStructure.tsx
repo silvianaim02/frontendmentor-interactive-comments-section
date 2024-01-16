@@ -139,7 +139,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReply
           <div className="horizontal-line"></div>
         </div>
         <div className="reply-list-wrapper">
-          {comment.replies.length !== 0 ? comment.replies?.map((replyItem, index) => (
+          {comment.replies?.length !== 0 ? comment.replies?.map((replyItem, index) => (
             <InheritanceReplyCard replyItem={replyItem} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
           )) : null}
         </div>
