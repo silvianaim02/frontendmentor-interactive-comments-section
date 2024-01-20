@@ -3,7 +3,7 @@ import CardItemStucture from "../components/CardItemStructure";
 import { useEffect, useState } from "react";
 import FieldCommentCard from "../components/FieldCommentCard";
 import dataComments from '../../src/data.json'
-import { Comment } from "../types";
+import { Comment, ItemField } from "../types";
 
 const Home = () => {
   const [isReplyMode, setReplyMode] = useState(false);
@@ -26,14 +26,37 @@ const Home = () => {
     }
   }, []);
 
+  const handleAddComment = (newComment: Comment) => {
+    // Update local storage and state with the new comment
+    const updatedComments = [...comments, newComment] as Comment[]
+    setComments(updatedComments);
+    localStorage.setItem('commentsData', JSON.stringify(updatedComments));
+  };
+
+  const handleAddReply = (parentId: number, newReply: ItemField) => {
+    // Find the parent comment in the state and update it with the new reply
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === parentId) {
+        return {
+          ...comment,
+          replies: [...(comment.replies ?? []), newReply],
+        };
+      }
+      return comment;
+    }) as ItemField[];
+
+    setComments(updatedComments);
+    localStorage.setItem('commentsData', JSON.stringify(updatedComments));
+  };
+
   return (
     <div className="main-wrapper">
       {comments?.length !== 0 ? comments?.map((comment, index) => (
-        <CardItemStucture idReply={idReply} comment={comment} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
+        <CardItemStucture onAddReply={handleAddReply} idReply={idReply} comment={comment} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
       )) : <p>kosong</p>}
 
       {/* Field Comment Card */}
-      <FieldCommentCard actionReply={`SEND`} />
+      <FieldCommentCard actionReply={`SEND`} onAddComment={handleAddComment} />
 
       {/* ATTRIBUTION */}
       <div className="attribution">

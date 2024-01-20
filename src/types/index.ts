@@ -6,19 +6,21 @@ export interface User {
   username: string;
 }
 
+export interface ItemField {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  user: User;
+}
+
 export interface Comment {
   id: number;
   content: string;
   createdAt: string;
   score: number;
   user: User;
-  replies?: {
-    id: number;
-    content: string;
-    createdAt: string;
-    score: number;
-    user: User;
-  }[];
+  replies?: ItemField[];
 }
 
 export interface CardItemStuctureProps {
@@ -27,16 +29,11 @@ export interface CardItemStuctureProps {
   idReply: string;
   isReplyMode: boolean;
   handleReplyClick: (id: string) => void;
+  onAddReply?: (parentId: number, newReply: ItemField) => void;
 }
 
 export interface InheritanceReplyCardProps {
-  replyItem: {
-    id: number;
-    content: string;
-    createdAt: string;
-    score: number;
-    user: User;
-  };
+  replyItem: ItemField;
   key: number;
   isReplyMode: boolean;
 }

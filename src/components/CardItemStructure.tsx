@@ -7,7 +7,7 @@ import InheritanceReplyCard from './InheritanceReplyCard'
 import { CardItemStuctureProps } from '../types'
 import { postedAt } from '../utils'
 
-const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReplyMode, comment, idReply }) => {
+const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, onAddReply, isReplyMode, comment, idReply }) => {
   // State untuk menyimpan nilai warna
   const [redColor, setRedColor] = useState('#ED6368');
   const [moderateBlueColor, setModerateBlueColor] = useState('#5357B6');
@@ -130,7 +130,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReply
 
       {/* Reply Input */}
       {isReplyMode && idReply === `reply-${comment.id}` && (
-        <FieldCommentCard actionReply={`REPLY`} />
+        <FieldCommentCard onAddReply={onAddReply} actionReply={`REPLY`} parentId={comment.id} treadOwner={comment.user.username} />
       )}
 
       {/* Reply Card Inheritance */}
