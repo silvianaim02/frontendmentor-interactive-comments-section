@@ -8,20 +8,20 @@
 }
 
 .main-wrapper {
-  background-color: var(--very-light-gray);
   min-height: 100vh;
-  width: 100%;
+  max-width: 730px;
+  margin: 0 auto;
   padding-top: 64px;
   padding-bottom: 64px;
 }
 
 .card-wrapper {
-  max-width: 730px;
-  margin: 0 auto;
+  max-width: 100%;
   margin-bottom: 20px;
 }
 
 .comment-wrapper {
+  max-width: 100%;
   border-radius: 8px;
   background: var(--White, #fff);
   height: fit-content;
@@ -136,7 +136,7 @@
 .reply-wrapper {
   display: flex;
   flex-direction: row;
-  max-width: 730px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -148,6 +148,10 @@
   background: var(--light-gray);
   width: 2px;
   height: calc(100% - 20px);
+}
+
+.reply-list-wrapper {
+  flex-grow: 1;
 }
 
 /* Field Comment Card */

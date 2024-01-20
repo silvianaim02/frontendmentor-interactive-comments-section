@@ -12,6 +12,7 @@ body {
   color: var(--color-text);
   margin: 0;
   font-family: 'Rubik', sans-serif;
+  background-color: var(--very-light-gray);
 }
 
 button,
