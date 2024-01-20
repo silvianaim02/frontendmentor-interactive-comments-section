@@ -37,6 +37,7 @@ export interface CardItemStuctureProps {
   idReply: string;
   isReplyMode: boolean;
   handleReplyClick: (id: string) => void;
+  setReplyMode?: (isReplyMode: boolean) => void;
   onAddReply?: (parentId: number, newReply: ItemField) => void;
 }
 
@@ -45,6 +46,7 @@ export interface InheritanceReplyCardProps {
   replyItem: ReplyField;
   key: number;
   isReplyMode: boolean;
+  setReplyMode?: (isReplyMode: boolean) => void;
   idReply: string;
   actionReply: string;
   parentId?: number;

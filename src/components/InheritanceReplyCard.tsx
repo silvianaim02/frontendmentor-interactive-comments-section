@@ -7,7 +7,7 @@ import { postedAt } from '../utils'
 import FieldCommentCard from './FieldCommentCard'
 // import imagee from '../assets/images/avatars/image-amyrobson.webp'
 
-const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ handleReplyClick, isReplyMode, replyItem, idReply, onAddReply, parentId }) => {
+const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, handleReplyClick, isReplyMode, replyItem, idReply, onAddReply, parentId }) => {
   // State untuk menyimpan nilai warna
   const [redColor, setRedColor] = useState('#ED6368');
   const [moderateBlueColor, setModerateBlueColor] = useState('#5357B6');
@@ -128,7 +128,13 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ handleReplyClick,
       </div>
       {/* Reply Input */}
       {isReplyMode && idReply === `reply-${replyItem.id}` && (
-        <FieldCommentCard onAddReply={onAddReply} actionReply={`REPLY`} parentId={parentId} threadOwner={replyItem.user.username} />
+        <FieldCommentCard
+          setReplyMode={setReplyMode}
+          onAddReply={onAddReply}
+          actionReply={`REPLY`}
+          parentId={parentId}
+          threadOwner={replyItem.user.username}
+        />
       )}
     </>
   )

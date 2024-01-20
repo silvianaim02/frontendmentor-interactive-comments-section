@@ -4,6 +4,7 @@ import { Comment, ReplyField } from '../types';
 import { generateUniqueId } from '../utils';
 
 interface FieldCommentCardProps {
+  setReplyMode?: (isReplyMode: boolean) => void;
   actionReply: string;
   parentId?: number;
   threadOwner?: string;
@@ -13,7 +14,7 @@ interface FieldCommentCardProps {
 
 const JuliusomoAva = data.currentUser.image.webp;
 
-const FieldCommentCard: FC<FieldCommentCardProps> = ({ actionReply, onAddComment, onAddReply, parentId, threadOwner }) => {
+const FieldCommentCard: FC<FieldCommentCardProps> = ({ setReplyMode, actionReply, onAddComment, onAddReply, parentId, threadOwner }) => {
   const [commentText, setCommentText] = useState(threadOwner ? `@${threadOwner} ` : '');
   const handleCommentSubmit = () => {
     if (actionReply === 'SEND' && onAddComment) {
@@ -44,10 +45,11 @@ const FieldCommentCard: FC<FieldCommentCardProps> = ({ actionReply, onAddComment
       };
 
       onAddReply(parentId, newReply);
-    }
 
+    }
     // Reset the comment text after submitting
     setCommentText('');
+    setReplyMode && setReplyMode(false);
   };
 
   return (
@@ -60,7 +62,7 @@ const FieldCommentCard: FC<FieldCommentCardProps> = ({ actionReply, onAddComment
         <button className="send-button" onClick={handleCommentSubmit}>{actionReply}</button>
         <div className="ava-send-button">
           <img className="current-user-avatar-mobile" src={JuliusomoAva} style={{ width: "32px", height: "32px" }} />
-          <button className="send-button-mobile">{actionReply}</button>
+          <button className="send-button-mobile" onClick={handleCommentSubmit}>{actionReply}</button>
         </div>
       </div>
     </div>

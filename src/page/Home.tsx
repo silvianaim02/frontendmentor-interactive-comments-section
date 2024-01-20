@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <div className="main-wrapper">
       {comments?.length !== 0 ? comments?.map((comment, index) => (
-        <CardItemStucture onAddReply={handleAddReply} idReply={idReply} comment={comment} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
+        <CardItemStucture setReplyMode={setReplyMode} onAddReply={handleAddReply} idReply={idReply} comment={comment} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
       )) : <p>kosong</p>}
 
       {/* Field Comment Card */}
