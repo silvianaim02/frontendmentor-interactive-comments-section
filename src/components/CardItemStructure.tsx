@@ -7,7 +7,7 @@ import InheritanceReplyCard from './InheritanceReplyCard'
 import { CardItemStuctureProps } from '../types'
 import { postedAt } from '../utils'
 
-const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReplyMode, comment }) => {
+const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReplyMode, comment, idReply }) => {
   // State untuk menyimpan nilai warna
   const [redColor, setRedColor] = useState('#ED6368');
   const [moderateBlueColor, setModerateBlueColor] = useState('#5357B6');
@@ -78,7 +78,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReply
                 </div>
                 :
                 <button
-                  onClick={handleReplyClick}
+                  onClick={() => handleReplyClick(`reply-${comment.id}`)}
                   onMouseOver={handleModerateBlueHover}
                   onMouseLeave={handleMouseLeave}
                   className="reply-button">
@@ -115,7 +115,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReply
                 </div>
                 :
                 <button
-                  onClick={handleReplyClick}
+                  onClick={() => handleReplyClick(`reply-${comment.id}`)}
                   onMouseOver={handleModerateBlueHover}
                   onMouseLeave={handleMouseLeave}
                   className="reply-button-mobile">
@@ -129,7 +129,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReply
       </div>
 
       {/* Reply Input */}
-      {isReplyMode && (
+      {isReplyMode && idReply === `reply-${comment.id}` && (
         <FieldCommentCard actionReply={`REPLY`} />
       )}
 
@@ -140,7 +140,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, isReply
         </div>
         <div className="reply-list-wrapper">
           {comment.replies?.length !== 0 ? comment.replies?.map((replyItem, index) => (
-            <InheritanceReplyCard replyItem={replyItem} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
+            <InheritanceReplyCard replyItem={replyItem} key={index} isReplyMode={isReplyMode} />
           )) : null}
         </div>
       </div>

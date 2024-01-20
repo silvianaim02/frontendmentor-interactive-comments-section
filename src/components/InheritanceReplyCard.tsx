@@ -6,7 +6,7 @@ import { InheritanceReplyCardProps } from '../types'
 import { postedAt } from '../utils'
 // import imagee from '../assets/images/avatars/image-amyrobson.webp'
 
-const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ handleReplyClick, replyItem }) => {
+const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({replyItem }) => {
   // State untuk menyimpan nilai warna
   const [redColor, setRedColor] = useState('#ED6368');
   const [moderateBlueColor, setModerateBlueColor] = useState('#5357B6');
@@ -75,7 +75,6 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ handleReplyClick,
               </div>
               :
               <button
-                onClick={handleReplyClick}
                 onMouseOver={handleModerateBlueHover}
                 onMouseLeave={handleMouseLeave}
                 className="reply-button">
@@ -112,7 +111,6 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ handleReplyClick,
               </div>
               :
               <button
-                onClick={handleReplyClick}
                 onMouseOver={handleModerateBlueHover}
                 onMouseLeave={handleMouseLeave}
                 className="reply-button-mobile">

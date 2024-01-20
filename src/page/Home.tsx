@@ -7,8 +7,11 @@ import { Comment } from "../types";
 
 const Home = () => {
   const [isReplyMode, setReplyMode] = useState(false);
-  const handleReplyClick = () => {
+  const [idReply, setIdReply] = useState("no");
+  const handleReplyClick = (id: string) => {
     setReplyMode(!isReplyMode);
+    console.log(id);
+    setIdReply(id)
   };
   const [comments, setComments] = useState<Comment[]>([]);
 
@@ -23,11 +26,10 @@ const Home = () => {
     }
   }, []);
 
-
   return (
     <div className="main-wrapper">
       {comments?.length !== 0 ? comments?.map((comment, index) => (
-        <CardItemStucture comment={comment} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
+        <CardItemStucture idReply={idReply} comment={comment} key={index} isReplyMode={isReplyMode} handleReplyClick={handleReplyClick} />
       )) : <p>kosong</p>}
 
       {/* Field Comment Card */}
