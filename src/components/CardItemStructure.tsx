@@ -130,7 +130,7 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, onAddRe
 
       {/* Reply Input */}
       {isReplyMode && idReply === `reply-${comment.id}` && (
-        <FieldCommentCard onAddReply={onAddReply} actionReply={`REPLY`} parentId={comment.id} treadOwner={comment.user.username} />
+        <FieldCommentCard onAddReply={onAddReply} actionReply={`REPLY`} parentId={comment.id} threadOwner={comment.user.username} />
       )}
 
       {/* Reply Card Inheritance */}
@@ -140,7 +140,16 @@ const CardItemStucture: FC<CardItemStuctureProps> = ({ handleReplyClick, onAddRe
         </div>
         <div className="reply-list-wrapper">
           {comment.replies?.length !== 0 ? comment.replies?.map((replyItem, index) => (
-            <InheritanceReplyCard replyItem={replyItem} key={index} isReplyMode={isReplyMode} />
+            <InheritanceReplyCard
+              handleReplyClick={handleReplyClick}
+              replyItem={replyItem}
+              key={index}
+              idReply={idReply}
+              isReplyMode={isReplyMode}
+              onAddReply={onAddReply}
+              actionReply={`REPLY`}
+              parentId={comment.id}
+              threadOwner={comment.user.username} />
           )) : null}
         </div>
       </div>

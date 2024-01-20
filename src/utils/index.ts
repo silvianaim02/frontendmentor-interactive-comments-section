@@ -38,4 +38,12 @@ function postedAt(date: string | number | Date): string {
   return 'now';
 }
 
-export { postedAt };
+const generateUniqueId = (): number => {
+  // Generate a random number between 1 and 1000000 (adjust the range as needed)
+  const randomNumber = Math.floor(Math.random() * 1000000) + 1;
+  // Combine with the current timestamp to ensure uniqueness
+  const uniqueId = Date.now() * 1000000 + randomNumber;
+  return uniqueId;
+};
+
+export { postedAt, generateUniqueId };

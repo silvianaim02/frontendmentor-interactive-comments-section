@@ -1,31 +1,20 @@
 import { FC, useState } from 'react';
 import data from '../data.json'
-import { Comment, ItemField } from '../types';
-
-// Function to generate a unique ID
-const generateUniqueId = (): number => {
-  // Generate a random number between 1 and 1000000 (adjust the range as needed)
-  const randomNumber = Math.floor(Math.random() * 1000000) + 1;
-
-  // Combine with the current timestamp to ensure uniqueness
-  const uniqueId = Date.now() * 1000000 + randomNumber;
-
-  return uniqueId;
-};
-
+import { Comment, ReplyField } from '../types';
+import { generateUniqueId } from '../utils';
 
 interface FieldCommentCardProps {
   actionReply: string;
   parentId?: number;
-  treadOwner?: string;
+  threadOwner?: string;
   onAddComment?: (newComment: Comment) => void; // Callback function to add a new comment
-  onAddReply?: (parentId: number, newReply: ItemField) => void; // Callback function to add a new reply
+  onAddReply?: (parentId: number, newReply: ReplyField) => void; // Callback function to add a new reply
 }
 
 const JuliusomoAva = data.currentUser.image.webp;
 
-const FieldCommentCard: FC<FieldCommentCardProps> = ({ actionReply, onAddComment, onAddReply, parentId, treadOwner }) => {
-  const [commentText, setCommentText] = useState('');
+const FieldCommentCard: FC<FieldCommentCardProps> = ({ actionReply, onAddComment, onAddReply, parentId, threadOwner }) => {
+  const [commentText, setCommentText] = useState(threadOwner ? `@${threadOwner} ` : '');
   const handleCommentSubmit = () => {
     if (actionReply === 'SEND' && onAddComment) {
       // Assuming you have a function to generate a unique comment ID
@@ -43,14 +32,14 @@ const FieldCommentCard: FC<FieldCommentCardProps> = ({ actionReply, onAddComment
       actionReply === 'REPLY' &&
       onAddReply &&
       parentId &&
-      treadOwner) {
+      threadOwner) {
       // Assuming you have the parent comment ID available
       const newReply = {
         id: generateUniqueId(),
         content: commentText,
         createdAt: new Date().toUTCString(),
         score: 0,
-        replyingTo: treadOwner,
+        replyingTo: threadOwner,
         user: data.currentUser,
       };
 

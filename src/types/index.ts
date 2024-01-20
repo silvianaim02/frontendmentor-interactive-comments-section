@@ -14,13 +14,21 @@ export interface ItemField {
   user: User;
 }
 
+export interface ReplyField {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  user: User;
+}
+
 export interface Comment {
   id: number;
   content: string;
   createdAt: string;
   score: number;
   user: User;
-  replies?: ItemField[];
+  replies?: ReplyField[];
 }
 
 export interface CardItemStuctureProps {
@@ -33,7 +41,13 @@ export interface CardItemStuctureProps {
 }
 
 export interface InheritanceReplyCardProps {
-  replyItem: ItemField;
+  handleReplyClick: (id: string) => void;
+  replyItem: ReplyField;
   key: number;
   isReplyMode: boolean;
+  idReply: string;
+  actionReply: string;
+  parentId?: number;
+  threadOwner?: string;
+  onAddReply?: (parentId: number, newReply: ItemField) => void; // Callback function to add a new reply
 }

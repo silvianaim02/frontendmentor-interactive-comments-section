@@ -3,7 +3,7 @@ import CardItemStucture from "../components/CardItemStructure";
 import { useEffect, useState } from "react";
 import FieldCommentCard from "../components/FieldCommentCard";
 import dataComments from '../../src/data.json'
-import { Comment, ItemField } from "../types";
+import { Comment, ReplyField } from "../types";
 
 const Home = () => {
   const [isReplyMode, setReplyMode] = useState(false);
@@ -33,7 +33,7 @@ const Home = () => {
     localStorage.setItem('commentsData', JSON.stringify(updatedComments));
   };
 
-  const handleAddReply = (parentId: number, newReply: ItemField) => {
+  const handleAddReply = (parentId: number, newReply: ReplyField) => {
     // Find the parent comment in the state and update it with the new reply
     const updatedComments = comments.map((comment) => {
       if (comment.id === parentId) {
@@ -43,7 +43,7 @@ const Home = () => {
         };
       }
       return comment;
-    }) as ItemField[];
+    }) as ReplyField[];
 
     setComments(updatedComments);
     localStorage.setItem('commentsData', JSON.stringify(updatedComments));
