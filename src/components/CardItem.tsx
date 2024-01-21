@@ -2,12 +2,11 @@ import { useState, FC } from 'react'
 import PlusSVG from "../assets/images/icon-plus.svg"
 import MinusSVG from "../assets/images/icon-minus.svg"
 import data from '../data.json'
-import { InheritanceReplyCardProps } from '../types'
+import { CardItemProps } from '../types'
 import { postedAt } from '../utils'
 import FieldCommentCard from './FieldCommentCard'
-// import imagee from '../assets/images/avatars/image-amyrobson.webp'
 
-const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, handleReplyClick, isReplyMode, replyItem, idReply, onAddReply, parentId }) => {
+const CardItem: FC<CardItemProps> = ({ setReplyMode, handleReplyClick, isReplyMode, item, idReply, onAddReply, parentId }) => {
   // State untuk menyimpan nilai warna
   const [redColor, setRedColor] = useState('#ED6368');
   const [moderateBlueColor, setModerateBlueColor] = useState('#5357B6');
@@ -47,18 +46,18 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, han
         <div className="comment-wrapper">
           <div className="count-wrapper">
             <img src={PlusSVG} />
-            <div className="numbers-vote">{replyItem.score}</div>
+            <div className="numbers-vote">{item?.score}</div>
             <img src={MinusSVG} />
           </div>
           <div className="content-wrapper">
             <div className="top-section">
               <div className="top-left-section">
-                <img style={{ width: "32px", height: "32px" }} src={replyItem.user.image.webp} />
-                <p className="username">{replyItem.user.username}</p>
-                {replyItem.user.username === data.currentUser.username && <div className="current-user-label"><p>you</p></div>}
-                <p className="date">{postedAt(replyItem.createdAt)}</p>
+                <img style={{ width: "32px", height: "32px" }} src={item?.user.image.webp} />
+                <p className="username">{item?.user.username}</p>
+                {item?.user.username === data.currentUser.username && <div className="current-user-label"><p>you</p></div>}
+                <p className="date">{item && postedAt(item.createdAt)}</p>
               </div>
-              {replyItem.user.username === data.currentUser.username ?
+              {item?.user.username === data.currentUser.username ?
                 <div className="action-button">
                   <button
                     onMouseOver={handleRedHover}
@@ -77,7 +76,7 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, han
                 </div>
                 :
                 <button
-                  onClick={() => handleReplyClick(`reply-${replyItem.id}`)}
+                  onClick={() => handleReplyClick(`reply-${item?.id}`)}
                   onMouseOver={handleModerateBlueHover}
                   onMouseLeave={handleMouseLeave}
                   className="reply-button">
@@ -87,7 +86,7 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, han
               }
             </div>
             <div className="body-section">
-              {highlightedText(replyItem.content)}
+              {item && highlightedText(item.content)}
             </div>
             <div className="bottom-section">
               <div className="count-wrapper-mobile">
@@ -95,7 +94,7 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, han
                 <div className="numbers-vote">5</div>
                 <img src={MinusSVG} />
               </div>
-              {replyItem.user.username === data.currentUser.username ?
+              {item?.user.username === data.currentUser.username ?
                 <div className="action-button-mobile">
                   <button
                     onMouseOver={handleRedHover}
@@ -114,7 +113,7 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, han
                 </div>
                 :
                 <button
-                  onClick={() => handleReplyClick(`reply-${replyItem.id}`)}
+                  onClick={() => handleReplyClick(`reply-${item?.id}`)}
                   onMouseOver={handleModerateBlueHover}
                   onMouseLeave={handleMouseLeave}
                   className="reply-button-mobile">
@@ -127,17 +126,17 @@ const InheritanceReplyCard: FC<InheritanceReplyCardProps> = ({ setReplyMode, han
         </div>
       </div>
       {/* Reply Input */}
-      {isReplyMode && idReply === `reply-${replyItem.id}` && (
+      {isReplyMode && idReply === `reply-${item?.id}` && (
         <FieldCommentCard
           setReplyMode={setReplyMode}
           onAddReply={onAddReply}
           actionReply={`REPLY`}
           parentId={parentId}
-          threadOwner={replyItem.user.username}
+          threadOwner={item?.user.username}
         />
       )}
     </>
   )
 };
 
-export default InheritanceReplyCard;
+export default CardItem;

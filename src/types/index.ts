@@ -41,14 +41,13 @@ export interface CardItemStuctureProps {
   onAddReply?: (parentId: number, newReply: ItemField) => void;
 }
 
-export interface InheritanceReplyCardProps {
+export interface CardItemProps {
   handleReplyClick: (id: string) => void;
-  replyItem: ReplyField;
+  item?: ReplyField;
   key: number;
   isReplyMode: boolean;
   setReplyMode?: (isReplyMode: boolean) => void;
   idReply: string;
-  actionReply: string;
   parentId?: number;
   threadOwner?: string;
   onAddReply?: (parentId: number, newReply: ItemField) => void; // Callback function to add a new reply
